@@ -9,40 +9,23 @@ from scw import SCW1,SCW2
 
 parser = argparse.ArgumentParser(description='Process some integers.')
 parser.add_argument('species')
-parser.add_argument('method')
-parser.add_argument('input')
 parser.add_argument('c')
 parser.add_argument('eta')
-parser.add_argument('diff')
 
 
 args = parser.parse_args()
 num_feature = 689#15+58 #original+GDV4+GDV5
-diff_threshold = args.diff
 
 species = args.species
-method = args.method
-input = args.input
+method = mix
+input = none
 
 date = time.strftime("%d%m%Y")
 out_file = open('output/'+species+"_"+input+"_"+method+"_"+date+".out","w")
 
-if input == 'remove':
-    phi = {'Styphi':40, 'Ftularensis':510, 'Ypestis':1610, 'Banthracis':1200}
-    pos_feature_file = open('data/impute-remove/'+species+'_positive_feature.csv','r')
-    neg_feature_file = open('data/impute-remove/'+species+'_negative_feature.csv','r')
-elif input == "impute":
-    phi = {'Styphi':100, 'Ftularensis':1300, 'Ypestis':4000, 'Banthracis':3000}
-    pos_feature_file = open('data/impute-mean/'+species+'_positive_feature.csv','r')
-    neg_feature_file = open('data/impute-mean/'+species+'_negative_feature.csv','r')
-elif input == "sep":
-    phi = {'Styphi':100, 'Ftularensis':1300, 'Ypestis':4000, 'Banthracis':3000}
-    pos_feature_file = open('data/impute-mean_separate_class/'+species+'_positive_feature.csv','r')
-    neg_feature_file = open('data/impute-mean_separate_class/'+species+'_negative_feature.csv','r')
-else:
-    phi = {'Styphi':100, 'Ftularensis':1300, 'Ypestis':4000, 'Banthracis':3000}
-    pos_feature_file = open('data/fill-zero/'+species+'_positive_feature.csv','r')
-    neg_feature_file = open('data/fill-zero/'+species+'_negative_feature.csv','r')
+phi = {'Styphi':100, 'Ftularensis':1300, 'Ypestis':4000, 'Banthracis':3000}
+pos_feature_file = open('data/'+species+'_positive_feature.csv','r')
+neg_feature_file = open('data/'+species+'_negative_feature.csv','r')
 
 num_phi = phi[species]
 
